@@ -1,0 +1,15 @@
+#!/bin/csh -f
+
+set RUN   = 121216
+set CHUNK = 000 
+
+# FROM IFARM
+scons install
+
+# For code testing, use EVENTS_TO_KEEP to run over small subsample
+# hd_root -PEVENTS_TO_KEEP=10000 -PPLUGINS=BBCAL_tree -PNTHREADS=2 -PBBCAL:FNAME="bbcal_${RUN}_${CHUNK}.root" /cache/halld/RunPeriod-2023-01/rawdata/Run$RUN/hd_rawdata_${RUN}_${CHUNK}.evio
+
+# For running over whole file (takes about 20 mins for 20 GB input file)
+hd_root -PPLUGINS=BBCAL_tree -PNTHREADS=2 -PBBCAL:FNAME="bbcal_trees_${RUN}_${CHUNK}.root" /cache/halld/RunPeriod-2023-01/rawdata/Run$RUN/hd_rawdata_${RUN}_${CHUNK}.evio
+
+
